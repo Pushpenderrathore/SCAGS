@@ -18,6 +18,7 @@ instance/
 
 # Logs
 *.log
+project_dump.txt
 
 # OS files
 .DS_Store
