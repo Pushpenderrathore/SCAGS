@@ -1,4 +1,4 @@
-# SCAGS — Smart College & Branch Guidance System
+# SCAGS Smart College & Branch Guidance System
 
 A full-stack web application that helps JEE Mains students find the best colleges based on their percentile, preferred branch, fees budget, and location preferences.
 
