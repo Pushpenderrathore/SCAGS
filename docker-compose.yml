@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-change-this-in-production}
+      - FLASK_DEBUG=false
+    volumes:
+      - scags_data:/app/data.db
+
+volumes:
+  scags_data:

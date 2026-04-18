@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCAGS — Smart College & Branch Guidance System</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="nav-brand">⚡ SCAGS</div>
+        <div class="nav-links">
+            <span id="nav-user"></span>
+            <button id="btn-logout" class="btn-ghost hidden" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- AUTH SECTION -->
+    <section id="auth-section">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form">
+                <h2>Welcome back</h2>
+                <p class="subtitle">Login to get your college recommendations</p>
+                <input type="text" id="login-username" placeholder="Username" />
+                <input type="password" id="login-password" placeholder="Password" />
+                <button class="btn-primary" onclick="login()">Login →</button>
+                <p id="login-error" class="error-msg"></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="hidden">
+                <h2>Create account</h2>
+                <p class="subtitle">Join SCAGS and find your best college</p>
+                <input type="text" id="reg-username" placeholder="Username" />
+                <input type="email" id="reg-email" placeholder="Email" />
+                <input type="password" id="reg-password" placeholder="Password (min 6 chars)" />
+                <button class="btn-primary" onclick="register()">Register →</button>
+                <p id="reg-error" class="error-msg"></p>
+                <p id="reg-success" class="success-msg"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN APP -->
+    <section id="app-section" class="hidden">
+        <div class="container">
+            <header class="app-header">
+                <h1>Find Your College</h1>
+                <p>Enter your JEE Mains percentile and preferred branch to get ranked recommendations.</p>
+            </header>
+
+            <!-- Filter Card -->
+            <div class="filter-card">
+                <div class="filter-grid">
+                    <div class="field-group">
+                        <label>JEE Mains Percentile *</label>
+                        <input type="number" id="percentile" placeholder="e.g. 96.5" min="0" max="100" step="0.01" />
+                    </div>
+                    <div class="field-group">
+                        <label>Branch *</label>
+                        <select id="branch">
+                            <option value="CSE">CSE</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Civil">Civil</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label>Max Annual Fees (₹)</label>
+                        <input type="number" id="max-fees" placeholder="e.g. 150000 (optional)" min="0" />
+                    </div>
+                    <div class="field-group">
+                        <label>Location Filter</label>
+                        <input type="text" id="location" placeholder="e.g. Rajasthan (optional)" />
+                    </div>
+                </div>
+                <button class="btn-primary btn-search" onclick="getRecommendations()">
+                    🔍 Get Recommendations
+                </button>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Querying database...</p>
+            </div>
+
+            <!-- Error -->
+            <p id="api-error" class="error-msg centered hidden"></p>
+
+            <!-- Results -->
+            <div id="results-section" class="hidden">
+                <div class="results-meta">
+                    <span id="results-count"></span>
+                    <span id="results-query"></span>
+                </div>
+                <div id="results-grid"></div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden">
+                <div class="empty-icon">🎓</div>
+                <h3>No colleges found</h3>
+                <p>Try lowering your percentile threshold or removing filters.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
