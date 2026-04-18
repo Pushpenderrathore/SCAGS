@@ -6,14 +6,15 @@ WORKDIR /app
 COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
-# Copy project
+# Copy project files
 COPY . .
 
-# Seed the database on build
-RUN python database/seed.py
+# Entrypoint script handles seeding + startup
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 5000
 
 ENV FLASK_DEBUG=false
 
-CMD ["python", "backend/app.py"]
+ENTRYPOINT ["/entrypoint.sh"]
